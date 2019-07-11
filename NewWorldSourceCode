@@ -1,0 +1,351 @@
+Imports Microsoft.Win32
+Imports System.IO
+
+Public Class NewWorldForm
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles titleLabel.Click
+
+    End Sub
+
+    Private Sub NewWorldForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        CheckInstall()
+
+    End Sub
+
+    Public Sub CheckInstall()
+        Dim pic1 As String = "\\con-isilon\setups\Departments\Police\New World\New World App install\files\img\green.jpg"
+        Dim pic2 As String = "\\con-isilon\setups\Departments\Police\New World\New World App install\files\img\red.jpg"
+
+        '-----------------------------------FrameWork Check-------------------------------------------
+        If Dir("C:\Windows\Microsoft.NET\Framework64\v4.0.30319\SetupCache\v4.6.01590", vbDirectory) <> "" Then
+            netFrameCheckTextBox.Text = ".Net FrameWork 4.6.2 Installed"
+            netFrameCheckPicBox.Image = Image.FromFile(pic1)
+        ElseIf Dir("C:\Windows\Microsoft.NET\Framework64\v4.0.30319\SetupCache\v4.7.02053", vbDirectory) <> "" Then
+            netFrameCheckTextBox.Text = ".Net FrameWork 4.7 installed"
+            netFrameCheckPicBox.Image = Image.FromFile(pic1)
+        Else
+            netFrameCheckTextBox.Text = "Install .Net FrameWork 4.6.2 or 4.7"
+            netFrameCheckPicBox.Image = Image.FromFile(pic2)
+        End If
+
+        '-----------------------------------GIS Component Check---------------------------------------
+
+        If Dir("C:\Program Files (x86)\Common Files\New World Systems\GIS Components\1.0\") Is Nothing Then
+            gisPic1PictureBox.Image = Image.FromFile(pic1)
+        Else
+            gisPic1PictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        If Dir("C:\Program Files\Common Files\New World Systems\GIS Components\1.0\") Is Nothing Then
+            gisPic2PictureBox.Image = Image.FromFile(pic1)
+        Else
+            gisPic2PictureBox.Image = Image.FromFile(pic2)
+        End If
+        '-----------------------------------SQL Compact Check-----------------------------------------
+        Dim sql86Checker As String
+        sql86Checker = "C:\Program Files (x86)\Microsoft SQL Server Compact Edition\v3.5\Desktop\System.Data.SqlServerCe.dll"
+
+        If File.Exists(sql86Checker) Then
+            sqlPic1PictureBox.Image = Image.FromFile(pic1)
+        Else
+            sqlPic1PictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        If Dir("C:\Program Files\Microsoft SQL Server Compact Edition\v3.5") Is Nothing Then
+            sqlPic2PictureBox.Image = Image.FromFile(pic1)
+        Else
+            sqlPic2PictureBox.Image = Image.FromFile(pic2)
+        End If
+        '-----------------------------------SYNC Providers Check--------------------------------------
+        If Dir("C:\Windows\Microsoft.NET\Framework\v2.0.50727\Microsoft Report Viewer Redistributable 2008") Is Nothing Then
+            snycPic1PictureBox.Image = Image.FromFile(pic1)
+        Else
+            snycPic1PictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        Dim filePathReportViewer2 As String
+        filePathReportViewer2 = "C:\Program Files (x86)\Microsoft Sync Framework\2.1\Runtime\x86\FeedSync21.dll"
+
+        If File.Exists(filePathReportViewer2) Then
+            syncPic2PictureBox.Image = Image.FromFile(pic1)
+        Else
+            syncPic2PictureBox.Image = Image.FromFile(pic2)
+        End If
+
+
+        Dim filePathReportViewer3 As String
+        filePathReportViewer3 = "C:\Program Files (x86)\Microsoft Sync Framework\2.1\Runtime\x86\resources\1033\FileSyncProvider21.rll"
+
+        If File.Exists(filePathReportViewer3) Then
+            snycPic3PictureBox.Image = Image.FromFile(pic1)
+        Else
+            snycPic3PictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        If Dir("C:\Program Files (x86)\Microsoft Sync Framework\2.1\Runtime\ADO.NET") Is Nothing Then
+            snycPic4PictureBox.Image = Image.FromFile(pic1)
+        Else
+            snycPic4PictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        Dim filePathReportViewer4 As String
+        filePathReportViewer4 = "C:\Program Files\Microsoft Sync Framework\2.1\Runtime\x64\FeedSync21.dll"
+
+        If File.Exists(filePathReportViewer4) Then
+            snycPic5PictureBox.Image = Image.FromFile(pic1)
+        Else
+            snycPic5PictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        Dim filePathReportViewer5 As String
+        filePathReportViewer5 = "C:\Program Files\Microsoft Sync Framework\2.1\Runtime\x64\resources\1033\FileSyncProvider21.rll"
+
+        If File.Exists(filePathReportViewer5) Then
+            snycPic6PictureBox6.Image = Image.FromFile(pic1)
+        Else
+            snycPic6PictureBox6.Image = Image.FromFile(pic2)
+        End If
+
+        If Dir("C:\Program Files\Microsoft Sync Framework\2.1\Runtime\ADO.NET") Is Nothing Then
+            snycPic7PictureBox.Image = Image.FromFile(pic1)
+        Else
+            snycPic7PictureBox.Image = Image.FromFile(pic2)
+        End If
+        '-----------------------------------Updater Check---------------------------------------------
+        Dim updaterCheck As String
+        updaterCheck = "C:\Program Files (x86)\New World Systems\New World Automatic Updater\NewWorld.Management.Updater.Service.exe"
+
+        If File.Exists(updaterCheck) Then
+            updaterPictureBox.Image = Image.FromFile(pic1)
+        Else
+            updaterPictureBox.Image = Image.FromFile(pic2)
+        End If
+        '-----------------------------------Mobile- Check---------------------------------------------
+        Dim mobilePoliceChecker As String
+        mobilePoliceChecker = "C:\Program Files (x86)\New World Systems\Aegis Mobile\AegisMobile.exe"
+
+        If File.Exists(mobilePoliceChecker) Then
+            policeMobilePictureBox.Image = Image.FromFile(pic1)
+        Else
+            policeMobilePictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        Dim mobileFireChecker As String
+        mobileFireChecker = "C:\Program Files (x86)\New World Systems\Aegis Fire Mobile\AegisMobile.exe"
+
+        If File.Exists(mobileFireChecker) Then
+            fireMobilePictureBox.Image = Image.FromFile(pic1)
+        Else
+            fireMobilePictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        '-----------------------------------MSP Records Check-----------------------------------------
+        Dim cadChecker As String
+        cadChecker = "C:\Program Files (x86)\New World Systems\Aegis MSP\AegisCAD.exe"
+
+        If File.Exists(cadChecker) Then
+            CADPictureBox.Image = Image.FromFile(pic1)
+        Else
+            CADPictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        Dim correctionsChecker As String
+        correctionsChecker = "C:\Program Files (x86)\New World Systems\Aegis MSP\AegisCorrections.exe"
+
+        If File.Exists(correctionsChecker) Then
+            correctionsPictureBox.Image = Image.FromFile(pic1)
+        Else
+            correctionsPictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        Dim fireRecordsChecker As String
+        fireRecordsChecker = "C:\Program Files (x86)\New World Systems\Aegis MSP\AegisFire.exe"
+
+        If File.Exists(fireRecordsChecker) Then
+            fireRecordsPictureBox.Image = Image.FromFile(pic1)
+        Else
+            fireRecordsPictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        Dim lermsChecker As String
+        lermsChecker = "C:\Program Files (x86)\New World Systems\Aegis MSP\AegisLerms.exe"
+
+        If File.Exists(lermsChecker) Then
+            lermsPictureBox.Image = Image.FromFile(pic1)
+        Else
+            lermsPictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        Dim maintenanceChecker As String
+        maintenanceChecker = "C:\Program Files (x86)\New World Systems\Aegis MSP\AegisMaintenance.exe"
+
+        If File.Exists(maintenanceChecker) Then
+            MaintenancePictureBox.Image = Image.FromFile(pic1)
+        Else
+            MaintenancePictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        Dim ncicChecker As String
+        ncicChecker = "C:\Program Files (x86)\New World Systems\Aegis MSP\AegisNCIC.exe"
+
+        If File.Exists(ncicChecker) Then
+            ncicPictureBox.Image = Image.FromFile(pic1)
+        Else
+            ncicPictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        '-----------------------------------CAD Check-------------------------------------------------
+        Dim cad86Checker As String
+        cad86Checker = "C:\Program Files (x86)\New World Systems\Aegis CAD Enterprise .NET Client\Broker Service\BrokerService.exe"
+
+        If File.Exists(cad86Checker) Then
+            cadNet86PictureBox.Image = Image.FromFile(pic1)
+        Else
+            cadNet86PictureBox.Image = Image.FromFile(pic2)
+        End If
+
+        Dim cad64Checker As String
+        cad64Checker = "C:\Program Files\New World Systems\Aegis CAD Enterprise .NET Client\Broker Service\BrokerService.exe"
+
+        If File.Exists(cad64Checker) Then
+            cadNet64PictureBox.Image = Image.FromFile(pic1)
+        Else
+            cadNet64PictureBox.Image = Image.FromFile(pic2)
+        End If
+
+    End Sub
+
+    Private Sub gisButton1_Click(sender As Object, e As EventArgs) Handles gisButton1.Click
+        Dim proc1 As New System.Diagnostics.Process()
+
+        proc1 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\2. GIS Components 1.0.44\NewWorld.Gis.Components.x86.msi", "")
+    End Sub
+
+    Private Sub gisButton2_Click(sender As Object, e As EventArgs) Handles gisButton2.Click
+        Dim proc2 As New System.Diagnostics.Process()
+
+        proc2 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\2. GIS Components 1.0.44\NewWorld.Gis.Components.x64.msi", "")
+    End Sub
+
+    Private Sub sqlButton1_Click(sender As Object, e As EventArgs) Handles sqlButton1.Click
+        Dim proc3 As New System.Diagnostics.Process()
+
+        proc3 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\3. SQL Compact 3.5 SP2\SSCERuntime_x86-ENU.msi", "")
+    End Sub
+
+    Private Sub sqlButton2_Click(sender As Object, e As EventArgs) Handles sqlButton2.Click
+        Dim proc4 As New System.Diagnostics.Process()
+
+        proc4 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\3. SQL Compact 3.5 SP2\SSCERuntime_x64-ENU.msi", "")
+    End Sub
+
+    Private Sub syncButton1_Click(sender As Object, e As EventArgs) Handles syncButton1.Click
+        Dim proc5 As New System.Diagnostics.Process()
+
+        proc5 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\4. Sync Providers 2.1\ReportViewer 2008.exe", "")
+    End Sub
+
+    Private Sub syncButton2_Click(sender As Object, e As EventArgs) Handles syncButton2.Click
+        Dim proc6 As New System.Diagnostics.Process()
+
+        proc6 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\4. Sync Providers 2.1\Sync x86\Synchronization-v2.1-x86-ENU.msi", "")
+    End Sub
+
+    Private Sub syncButton3_Click(sender As Object, e As EventArgs) Handles syncButton3.Click
+        Dim proc1 As New System.Diagnostics.Process()
+
+        proc1 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\4. Sync Providers 2.1\Sync x86\ProviderServices-v2.1-x86-ENU.msi", "")
+    End Sub
+
+    Private Sub syncButton4_Click(sender As Object, e As EventArgs) Handles syncButton4.Click
+        Dim proc1 As New System.Diagnostics.Process()
+
+        proc1 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\4. Sync Providers 2.1\Sync x86\DatabaseProviders-v3.1-x86-ENU.msi", "")
+    End Sub
+
+    Private Sub syncButton5_Click(sender As Object, e As EventArgs) Handles syncButton5.Click
+        Dim proc7 As New System.Diagnostics.Process()
+
+        proc7 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\4. Sync Providers 2.1\Sync x64\Synchronization-v2.1-x64-ENU.msi", "")
+    End Sub
+
+    Private Sub syncButton6_Click(sender As Object, e As EventArgs) Handles syncButton6.Click
+        Dim proc8 As New System.Diagnostics.Process()
+
+        proc8 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\4. Sync Providers 2.1\Sync x64\ProviderServices-v2.1-x64-ENU.msi", "")
+    End Sub
+
+    Private Sub syncButton7_Click(sender As Object, e As EventArgs) Handles syncButton7.Click
+        Dim proc9 As New System.Diagnostics.Process()
+
+        proc9 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\1. PreReqs\4. Sync Providers 2.1\Sync x64\DatabaseProviders-v3.1-x64-ENU.msi", "")
+    End Sub
+
+    Private Sub updaterButton_Click(sender As Object, e As EventArgs) Handles updaterButton.Click
+        Dim proc10 As New System.Diagnostics.Process()
+
+        proc10 = Process.Start("\\con-isilon\setups\Departments\Police\New World\2017.1 SP1 HF6 Release\Updater 1.5.23\NewWorld.Management.Updater.msi", "")
+    End Sub
+
+    Private Sub NetFrame462Button_Click(sender As Object, e As EventArgs) Handles NetFrame642Button.Click
+        Dim pro11 As New System.Diagnostics.Process()
+
+        pro11 = Process.Start("\\con-isilon\setups\Departments\Police\New World\2017.1 SP1 HF6 Release\Public Safety Release 2017.x Pre-Reqs\Microsoft .NET Framework\.NET 4.6.2\NDP462-KB3151802-Web.exe", "")
+    End Sub
+
+    Private Sub NetFrame7Button_Click(sender As Object, e As EventArgs) Handles NetFrame7Button.Click
+        Dim proc12 As New System.Diagnostics.Process()
+
+        proc12 = Process.Start("\\con-isilon\setups\Departments\Police\New World\2017.1 SP1 HF6 Release\Public Safety Release 2017.x Pre-Reqs\Microsoft .NET Framework\.NET 4.7\NDP47-KB3186500-Web.exe", "")
+    End Sub
+
+    Private Sub policeMobileButton_Click(sender As Object, e As EventArgs) Handles policeMobileButton.Click
+        Dim proc13 As New System.Diagnostics.Process()
+
+        proc13 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\Mobile\1. Use updater configuration utility\Configure updater for Mobile V2 - Police\Configure Updater for mobile V2.exe", "")
+    End Sub
+
+    Private Sub fireMobileButton_Click(sender As Object, e As EventArgs) Handles fireMobileButton.Click
+        Dim proc14 As New System.Diagnostics.Process()
+
+        proc14 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\Mobile\1. Use updater configuration utility\Configure updater for Mobile V2 - Fire\Configure Updater for mobile V2.exe", "")
+    End Sub
+
+    Private Sub aegisButton_Click(sender As Object, e As EventArgs) Handles aegisButton.Click
+        Dim proc15 As New System.Diagnostics.Process()
+
+        proc15 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\MSP (Records)\4-30-15\AegisMSPClient.msi", "")
+    End Sub
+
+    Private Sub CheckInstallButton_Click(sender As Object, e As EventArgs) Handles CheckInstallButton.Click
+        CheckInstall()
+    End Sub
+
+    Private Sub cadNet86Button_Click(sender As Object, e As EventArgs) Handles cadNet86Button.Click
+        Dim proc16 As New System.Diagnostics.Process()
+
+        proc16 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\CAD.net\4-30-15\NewWorld.Aegis.CAD.NET.Client.x86.msi", "")
+    End Sub
+
+    Private Sub cadNet64Button_Click(sender As Object, e As EventArgs) Handles cadNet64Button.Click
+        Dim proc17 As New System.Diagnostics.Process()
+
+        proc17 = Process.Start("\\con-isilon\setups\Departments\Police\New World\Client Install\CAD.net\4-30-15\NewWorld.Aegis.CAD.NET.Client.x64.msi", "")
+    End Sub
+
+    Private Sub openFileLocationButton_Click(sender As Object, e As EventArgs) Handles openFileLocationButton.Click
+        Process.Start("\\con-isilon\setups\Departments\Police\New World")
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        CheckInstall()
+    End Sub
+
+    Private Sub preReqAutoInstall_button_Click(sender As Object, e As EventArgs) Handles preReqAutoInstall_button.Click
+        Dim proc18 As New System.Diagnostics.Process()
+
+        proc18 = Process.Start("\\con-isilon\setups\Departments\Police\New World\New World App install\files\NewWorldPreReqAuto\NewWordPreReq_Installer.bat", "")
+    End Sub
+
+
+End Class
